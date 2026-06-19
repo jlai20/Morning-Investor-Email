@@ -8,7 +8,7 @@ import smtplib
 import yaml
 import feedparser
 import requests
-from google import genai
+import anthropic
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta, timezone
 from email.mime.multipart import MIMEMultipart
@@ -18,10 +18,8 @@ from email.mime.text import MIMEText
 
 GMAIL_USER = os.environ["GMAIL_USER"]          # jlai5212@gmail.com
 GMAIL_APP_PW = os.environ["GMAIL_APP_PW"]      # 16-char app password
-GEMINI_KEY = os.environ["GEMINI_API_KEY"]
+ANTHROPIC_KEY = os.environ["ANTHROPIC_API_KEY"]
 RECIPIENT = os.environ.get("RECIPIENT_EMAIL", GMAIL_USER)
-
-_genai_client = genai.Client(api_key=GEMINI_KEY)
 
 NITTER_INSTANCES = [
     "https://nitter.privacydev.net",
@@ -226,12 +224,14 @@ CONTENT:
 
 
 def summarise(items):
+    client = anthropic.Anthropic(api_key=ANTHROPIC_KEY)
     prompt = build_prompt(items)
-    response = _genai_client.models.generate_content(
-        model="gemini-1.5-flash",
-        contents=prompt,
+    message = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=4096,
+        messages=[{"role": "user", "content": prompt}],
     )
-    return response.text
+    return message.content[0].text
 
 
 # ── Email ─────────────────────────────────────────────────────────────────────
