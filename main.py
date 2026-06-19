@@ -8,7 +8,7 @@ import smtplib
 import yaml
 import feedparser
 import requests
-import google.generativeai as genai
+from google import genai
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta, timezone
 from email.mime.multipart import MIMEMultipart
@@ -21,7 +21,7 @@ GMAIL_APP_PW = os.environ["GMAIL_APP_PW"]      # 16-char app password
 GEMINI_KEY = os.environ["GEMINI_API_KEY"]
 RECIPIENT = os.environ.get("RECIPIENT_EMAIL", GMAIL_USER)
 
-genai.configure(api_key=GEMINI_KEY)
+_genai_client = genai.Client(api_key=GEMINI_KEY)
 
 NITTER_INSTANCES = [
     "https://nitter.privacydev.net",
@@ -226,9 +226,11 @@ CONTENT:
 
 
 def summarise(items):
-    model = genai.GenerativeModel("gemini-1.5-flash")
     prompt = build_prompt(items)
-    response = model.generate_content(prompt)
+    response = _genai_client.models.generate_content(
+        model="gemini-1.5-flash",
+        contents=prompt,
+    )
     return response.text
 
 
