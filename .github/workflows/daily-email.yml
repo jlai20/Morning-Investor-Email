@@ -1,0 +1,34 @@
+name: Morning Email
+
+on:
+  schedule:
+    # 6:00 AM AEST = 20:00 UTC (standard time) / 21:00 UTC (daylight saving)
+    # Running at 20:00 UTC covers both periods reasonably
+    - cron: "0 20 * * *"
+  workflow_dispatch:  # allows manual trigger from GitHub Actions tab
+
+jobs:
+  send-morning-email:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run morning email script
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PW: ${{ secrets.GMAIL_APP_PW }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+        run: python main.py

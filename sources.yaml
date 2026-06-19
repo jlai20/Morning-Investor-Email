@@ -1,0 +1,126 @@
+# Morning Email — Source Configuration
+# Add or remove sources here without touching the main script.
+# Types: rss | scrape | nitter
+# For 'scrape' sources, 'filter' is an optional keyword to match in article URLs or titles.
+
+fund_managers:
+
+  - name: "Howard Marks (Oaktree)"
+    type: rss
+    url: "https://rss.art19.com/the-memo-by-howard-marks"
+
+  - name: "Ray Dalio (Bridgewater)"
+    type: scrape
+    url: "https://www.bridgewater.com/research-and-insights"
+
+  - name: "Citadel / Ken Griffin"
+    type: scrape
+    url: "https://hedgeco.net/hedgenews/author/ken-griffin/"
+
+  - name: "Martin Conlon (Schroders)"
+    type: scrape
+    url: "https://www.schroders.com/en-au/au/adviser/insights/"
+    filter: "martin-conlon"
+
+  - name: "Emma Fischer (Airlie)"
+    type: scrape
+    url: "https://www.airliefundsmanagement.com.au/insights/"
+
+  - name: "L1 Capital"
+    type: scrape
+    url: "https://www.l1.com.au/insights/all-insights/"
+
+  - name: "GQG Partners"
+    type: scrape
+    url: "https://gqg.com/insights/"
+
+  - name: "Cooper Investors"
+    type: scrape
+    url: "https://www.cooperinvestors.com/news-insights/"
+
+  # Livewire — selective Australian managers only
+  - name: "Paradice (Livewire)"
+    type: scrape
+    url: "https://www.livewiremarkets.com/keywords/paradice-investment-management"
+
+  - name: "Magellan (Livewire)"
+    type: scrape
+    url: "https://www.livewiremarkets.com/keywords/magellan"
+
+newsletters:
+
+  # Michael Burry — Cassandra Unchained. AI bubble thesis, contrarian macro.
+  # Most posts are paywalled ($379/yr). We scrape free previews and notes.
+  - name: "Michael Burry (Cassandra Unchained)"
+    type: scrape
+    url: "https://michaeljburry.substack.com/"
+
+  # Citrini Research — #1 Finance on Substack (212K subscribers).
+  # Thematic equity + global macro. Featured in Bloomberg and The Economist.
+  - name: "Citrini Research"
+    type: scrape
+    url: "https://www.citriniresearch.com/"
+
+  # Doomberg — #3 Finance on Substack (380K subscribers).
+  # Energy, commodities, geopolitics. Contrarian and lateral thinking.
+  - name: "Doomberg"
+    type: scrape
+    url: "https://newsletter.doomberg.com/"
+
+  # Global Macro Investor — Raoul Pal. Institutional-level macro framework.
+  # Rates, FX, equities, commodities, crypto cycles.
+  - name: "Global Macro Investor (Raoul Pal)"
+    type: scrape
+    url: "https://raoulpal.substack.com/"
+
+  # Net Interest — Marc Rubinstein. 25yr hedge fund veteran.
+  # Deep financial sector analysis. Cited in FT, Bloomberg, UK Parliament.
+  - name: "Net Interest (Marc Rubinstein)"
+    type: scrape
+    url: "https://www.netinterest.co/"
+
+mining_commodities:
+
+  - name: "Money of Mine"
+    type: rss
+    url: "https://lifeofminepodcast.com/feed/podcast/money-of-mine/"
+
+  - name: "Kitco News"
+    type: rss
+    url: "https://www.kitco.com/rss/kitco-news.rss"
+
+  - name: "Mining.com"
+    type: rss
+    url: "https://www.mining.com/feed/"
+
+twitter:
+  # Fetched via Nitter public RSS (no API key needed)
+  # Format: nitter_instance/username/rss
+
+  - name: "Javier Blas"
+    type: nitter
+    handle: "JavierBlas"
+
+  - name: "Respeculator"
+    type: nitter
+    handle: "respeculator"
+
+  - name: "Serenity"
+    type: nitter
+    handle: "aleabitoreddit"
+
+  - name: "Yellow Lab Life"
+    type: nitter
+    handle: "YellowLabLife"
+
+  - name: "Jukan"
+    type: nitter
+    handle: "jukan05"
+
+  - name: "Charlie Bilello"
+    type: nitter
+    handle: "charliebilello"
+
+  - name: "BobE"
+    type: nitter
+    handle: "BobEUnlimited"
