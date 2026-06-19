@@ -2,9 +2,8 @@ name: Morning Email
 
 on:
   schedule:
-    # 6:00 AM AEST = 20:00 UTC (standard time) / 21:00 UTC (daylight saving)
-    # Running at 20:00 UTC covers both periods reasonably
-    - cron: "0 20 * * *"
+    # 8:00 AM AEST = 22:00 UTC (standard time) / 23:00 UTC (daylight saving)
+    - cron: "0 22 * * *"
   workflow_dispatch:  # allows manual trigger from GitHub Actions tab
 
 jobs:
